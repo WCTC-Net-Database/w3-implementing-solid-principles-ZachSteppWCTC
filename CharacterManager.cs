@@ -53,15 +53,24 @@ public class CharacterManager
     public void DisplayCharacters()
     {
         // TODO: Implement displaying characters from the CSV file
+        Character[] characters = CharacterReader.ReadLines(_filePath);
+        CharacterReader.PrintCharacters(characters, _output);
     }
 
     public void AddCharacter()
     {
         // TODO: Implement adding a new character and saving to the CSV file
+        Character[] characters = CharacterReader.ReadLines(_filePath);
+        Character newCharacter = Character.CreateCharacter(_input, _output);
+        characters = characters.Append(newCharacter).ToArray();
+        CharacterWriter.WriteFile(characters, _filePath);
     }
 
     public void LevelUpCharacter()
     {
         // TODO: Implement leveling up a character and updating the CSV file
+        Character[] characters = CharacterReader.ReadLines(_filePath);
+        characters = Character.IncreaseCharacterLevel(characters, _output);
+        CharacterWriter.WriteFile(characters, _filePath);
     }
 }
